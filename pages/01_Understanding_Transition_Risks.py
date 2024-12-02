@@ -9,6 +9,7 @@ st.write("""We apply a simple free-cash flows model, embedding NGFS climate scen
 We do so to understand the relative importance of the source of transition risks. 
          """)
 
+
 etfs = {
     "IWRD.L": "iShares MSCI World UCITS ETF",
     "SPY" : "SPDR S&P 500 ETF Trust",
@@ -33,8 +34,8 @@ import plotly.graph_objects as go
 
 # Randomly generate loss data for demonstration
 total_loss = np.random.uniform(10, 30)  # Total loss as a random number
-loss_from_net_carbon_tax = total_loss * np.random.uniform(0.4, 0.7)  # Portion due to net carbon tax
-loss_from_revenue = total_loss - loss_from_net_carbon_tax  # Remainder is revenue loss
+loss_from_revenue = total_loss * np.random.uniform(0.5, 0.7)  # Portion due to net carbon tax
+loss_from_net_carbon_tax = total_loss - loss_from_revenue  # Remainder is revenue loss
 
 # Create a DataFrame for display
 data = {
@@ -71,3 +72,28 @@ fig.update_layout(
 
 # Display the plot
 st.plotly_chart(fig)
+
+st.write("""
+### Transition Risks Definition
+         
+Here, we define transition risks as changes in investor expectations around transition scenarios. Namely, 
+we consider risks as changes from the continuation of the current state (Current Policies scenarios) 
+to a future state, where the future state is defined by the NGFS climate transition scenarios.
+""")
+
+st.write("""
+### Method 
+         
+We employ a free-cash flows model and only consider change in value due to the cash flows channel (i.e., no change in discount rates).
+The future expected cash flows are calculated under the NGFS climate scenarios, and the difference between the current and future discounted expected cash flows is the repricing effect.
+         
+We decompose the repricing effect into two components:
+1. Loss due to net carbon tax
+2. Loss due to revenue
+""")
+
+st.write("""
+### Main Result
+         
+The revenue is the most significant component of the total loss in most of sectors. 
+""")
